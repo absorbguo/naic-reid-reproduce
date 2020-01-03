@@ -71,8 +71,8 @@ WORKDIR /
 RUN rm -rf /apex
 
 # clone code
-RUN mkdir -p /awesome-reid
-ADD awesome-reid /awesome-reid
+RUN mkdir -p /naic-reid-rush-team
+ADD naic-reid-rush-team /naic-reid-rush-team
 VOLUME /tmp/data
-WORKDIR /awesome-reid
+WORKDIR /naic-reid-rush-team
 CMD ["/bin/bash", "-c", "sh Reproduce-test.sh 2>&1 | tee -a /tmp/data/test.log"]
