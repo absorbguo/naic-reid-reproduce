@@ -7,7 +7,7 @@ Run Method
 
 ## step 1:Build from Dockerfile
 ```bash
-git clone https://<username>:<password>@github.com/absorbguo/naic-reid-reproduce
+git clone https://<username>:<password>@github.com/absorbguo/naic-reid-reproduce.git
 cd naic-reid-reproduce
 git clone https://<username>:<password>@github.com/absorbguo/naic-reid-rush-team.git
 docker build -t reid:rush-team-train --file Dockerfile.train ./
