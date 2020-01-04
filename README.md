@@ -16,16 +16,26 @@ docker build -t reid:rush-team-test --file Dockerfile.test ./
 ```
 
 ## step 2:Run Docker for unit test
+`data_path`是本地数据所在地址。 `mount_data_path`是容器内部挂载的地址。
+
+2 运行单元测试镜像。如果有最终生成文件`NAIC2019_unit_test.json`生成在answer文件夹中则通过测试。在挂载的根目录下会生成unit-test.log，通过该log进行确认。
+
 ```bash
-nvidia-docker run --name reid-unit-test -d -v <data_path>:<mount_data_path> --shm-size=20480m reid:rush-team-unit-test
+nvidia-docker run --name reid-unit-test -d --rm -v <data_path>:<mount_data_path> --shm-size=20480m reid:rush-team-unit-test
 ```
+
+ps:运行完单元测试后请删除model路径下的所有文件。
+
+3 运行训练镜像。过程文件产生在`./model`中。在挂载的根目录下会生成train.log，通过该log进行确认。
 
 ## step 3:Run Docker for train
 ```bash
-nvidia-docker run --name reid-train -d -v <data_path>:<mount_data_path> --shm-size=20480m reid:rush-team-train
+nvidia-docker run --name reid-train -d --rm -v <data_path>:<mount_data_path> --shm-size=20480m reid:rush-team-train
 ```
+
+4 运行推理镜像。最终文件`NAIC2019_5rush_final.json`生成在answer文件夹。在挂载的根目录下会生成test.log，通过该log进行确认。
 
 ## step 4:Run Docker for test
 ```bash
-nvidia-docker run --name reid-test -d -v <data_path>:<mount_data_path> --shm-size=20480m reid:rush-team-test
+nvidia-docker run --name reid-test -d --rm -v <data_path>:<mount_data_path> --shm-size=20480m reid:rush-team-test
 ```
