@@ -13,6 +13,7 @@ git clone https://<username>:<password>@github.com/absorbguo/naic-reid-rush-team
 docker build -t reid:rush-team-unit-test --file Dockerfile.unit-test ./
 docker build -t reid:rush-team-train --file Dockerfile.train ./
 docker build -t reid:rush-team-test --file Dockerfile.test ./
+docker build -t reid:rush-team-rerank --file Dockerfile.rerank ./
 ```
 
 ## step 2:Run Docker for unit test
@@ -38,4 +39,11 @@ nvidia-docker run --name reid-train -d --rm -v <data_path>:<mount_data_path> --s
 ## step 4:Run Docker for test
 ```bash
 nvidia-docker run --name reid-test -d --rm -v <data_path>:<mount_data_path> --shm-size=20480m reid:rush-team-test
+```
+
+5 如果第4步运行完后没有在answer文件夹下生成最终文件。运行rerank镜像。再次进行rerank，最终文件`NAIC2019_5rush_final.json`生成在answer文件夹。在挂载的根目录下会生成rerank.log，通过该log进行确认。
+
+## step 5:Run Docker for rerank
+```bash
+nvidia-docker run --name reid-rerank -d --rm -v <data_path>:<mount_data_path> --shm-size=30720m reid:rush-team-rerank
 ```
