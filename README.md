@@ -48,7 +48,7 @@ nvidia-docker run --name reid-test -d --rm -v <data_path>:<mount_data_path> --sh
 
 ## step 5:Run Docker for rerank
 `备选步骤`
-5 `如果`第4步运行完后没有在answer文件夹下生成最终文件。运行rerank镜像。再次进行rerank，最终文件`NAIC2019_5rush_final.json`生成在answer文件夹。在挂载的根目录下会生成rerank.log，通过该log进行确认。
+5 `如果`第4步运行完后没有在answer文件夹下生成最终文件。运行rerank镜像。再次进行rerank，最终文件`NAIC2019_5rush_final.json`生成在answer文件夹。在挂载的根目录下会生成rerank.log，通过该log进行确认。整个reranking过程持续1小时左右。
 
 ```bash
 nvidia-docker run --name reid-rerank -d --rm -v <data_path>:<mount_data_path> --shm-size=30720m reid:rush-team-rerank
